@@ -1,13 +1,4 @@
-import {
-  Box,
-  Flex,
-  Heading,
-  Image,
-  Menu,
-  MenuButton,
-  Text,
-  useColorMode,
-} from "@chakra-ui/react";
+import { Flex, Heading, Image, useColorMode } from "@chakra-ui/react";
 
 import ThemeButton from "./ThemeButton";
 import logo from "../assets/logo.png";
@@ -23,6 +14,7 @@ const Navbar = () => {
         alignItems="center"
         justifyContent="space-around"
         borderRightWidth="1px"
+        padding={2}
       >
         <Image
           src={logo}

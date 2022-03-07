@@ -1,14 +1,12 @@
 import "./App.css";
 
+import Application from "./components/Application";
 import Layout from "./components/Layout";
-import RollerPanel from "./components/RollerPanel";
-import RollerView from "./components/RollerView";
 
 function App() {
   return (
     <Layout>
-      <RollerView />
-      <RollerPanel />
+      <Application />
     </Layout>
   );
 }

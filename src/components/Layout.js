@@ -24,7 +24,13 @@ const Layout = ({ children }) => {
           },
         }}
       >
-        <Flex h="100%" justifyContent="center" alignItems="center">
+        <Flex
+          h="100%"
+          width="100%"
+          flexDir="column"
+          justifyContent="center"
+          alignItems="center"
+        >
           {children}
         </Flex>
       </Box>
