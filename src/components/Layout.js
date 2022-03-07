@@ -27,8 +27,9 @@ const Layout = ({ children }) => {
         <Flex
           h="100%"
           width="100%"
+          maxH="100vh"
           flexDir="column"
-          justifyContent="center"
+          justifyContent="start"
           alignItems="center"
         >
           {children}

@@ -1,11 +1,9 @@
-import { Flex, Heading, Image, useColorMode } from "@chakra-ui/react";
+import { Flex, Heading, Image } from "@chakra-ui/react";
 
 import ThemeButton from "./ThemeButton";
 import logo from "../assets/logo.png";
 
 const Navbar = () => {
-  const { colorMode } = useColorMode();
-
   return (
     <Flex h="100%" justifyContent="space-between" alignItems="center">
       <Flex
