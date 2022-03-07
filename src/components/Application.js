@@ -70,7 +70,7 @@ const Application = () => {
   return (
     <Fragment>
       {/* total */}
-      <Box>
+      <Box mb={5}>
         <Heading>Total: {totalBonesValue}</Heading>
       </Box>
       {/* outputs */}
@@ -124,14 +124,14 @@ const Application = () => {
       </Flex>
 
       {/* inputs */}
-      <Flex align="start" justify="center">
+      <Flex align="start" justify="center" mt={5}>
         {/* count */}
         <Flex flexDir="column" alignItems="center" justify="center" mr={6}>
-          <Heading mb={2}>How Many</Heading>
-          <Flex wrap="nowrap" direction="row" align="center" justify="center">
+          <Heading mb={2}>What's this do</Heading>
+          {/* <Flex wrap="nowrap" direction="row" align="center" justify="center">
             <Input variant="filled" placeholder="1" mr="5px" />
             <Button />
-          </Flex>
+          </Flex> */}
           <Button mt="5px" onClick={() => handleClearBones()}>
             Clear All Bones
           </Button>
