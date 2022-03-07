@@ -6,7 +6,6 @@ import {
   Heading,
   IconButton,
   Image,
-  Input,
   NumberDecrementStepper,
   NumberIncrementStepper,
   NumberInput,
@@ -128,10 +127,6 @@ const Application = () => {
         {/* count */}
         <Flex flexDir="column" alignItems="center" justify="center" mr={6}>
           <Heading mb={2}>What's this do</Heading>
-          {/* <Flex wrap="nowrap" direction="row" align="center" justify="center">
-            <Input variant="filled" placeholder="1" mr="5px" />
-            <Button />
-          </Flex> */}
           <Button mt="5px" onClick={() => handleClearBones()}>
             Clear All Bones
           </Button>
