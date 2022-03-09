@@ -32,12 +32,9 @@ const Application = () => {
 
   const handleAddBone = useCallback(
     (value) => {
-      const min = value % 3 === 0 ? 1 : 0;
-      console.log("min: ", min);
+      const min = 1;
       const max = Math.ceil(value);
-      console.log("max: ", max);
       const randomBoneValue = Math.floor(Math.random() * (max - min) + min);
-      console.log("randomboneval: ", randomBoneValue);
 
       setTotalBonesValue(totalBonesValue + randomBoneValue);
       setBones([...bones, randomBoneValue]);
@@ -47,7 +44,6 @@ const Application = () => {
 
   const handleRemoveBone = useCallback(
     (index) => {
-      console.log(index);
       const _boneInArray = bones[index];
       setTotalBonesValue(totalBonesValue - _boneInArray);
 
@@ -55,8 +51,6 @@ const Application = () => {
         .slice(0, index)
         .concat(bones.slice(index + 1, bones.length));
       setBones(_bones);
-
-      console.log(bones);
     },
     [bones, totalBonesValue]
   );
