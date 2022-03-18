@@ -34,7 +34,7 @@ const Application = () => {
     (value) => {
       const min = 1;
       const max = Math.ceil(value);
-      const randomBoneValue = Math.floor(Math.random() * (max - min) + min);
+      const randomBoneValue = Math.round(Math.random() * (max - min) + min);
 
       setTotalBonesValue(totalBonesValue + randomBoneValue);
       setBones([...bones, randomBoneValue]);
