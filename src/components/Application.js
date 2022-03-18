@@ -1,3 +1,5 @@
+import "../lib/GetBone";
+
 import {
   Box,
   Button,
@@ -15,6 +17,17 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 import { Fragment, useCallback, useState } from "react";
+import {
+  GetCoinBone,
+  GetD10Bone,
+  GetD12Bone,
+  GetD20Bone,
+  GetD4Bone,
+  GetD6Bone,
+  GetD8Bone,
+  GetDXBone,
+  HandleGetBone,
+} from "../lib/GetBone";
 
 import { CheckIcon } from "@chakra-ui/icons";
 import bone from "../assets/bone.png";
@@ -32,12 +45,15 @@ const Application = () => {
 
   const handleAddBone = useCallback(
     (value) => {
+      const boneGraphic = HandleGetBone(value);
+      //todo: finish this refactor
+
       const min = 1;
       const max = Math.ceil(value);
-      const randomBoneValue = Math.round(Math.random() * (max - min) + min);
+      const boneValue = Math.round(Math.random() * (max - min) + min);
 
-      setTotalBonesValue(totalBonesValue + randomBoneValue);
-      setBones([...bones, randomBoneValue]);
+      setTotalBonesValue(totalBonesValue + boneValue);
+      setBones([...bones, [boneValue, boneGraphic]]);
     },
     [bones, totalBonesValue]
   );
@@ -94,13 +110,14 @@ const Application = () => {
               m="5px"
             >
               <Flex w="100%" h="100%" align="center" justify="center">
-                {value === 20 && <Image src={boneDi} w="100%" />}
+                {/* {value === 20 && <Image src={boneDi} w="100%" />}
                 {value % 3 === 0 && value !== 20 && (
                   <Image src={boneTri} w="100%" />
                 )}
                 {value % 3 !== 0 && value !== 20 && (
                   <Image src={bone} w="100%" />
-                )}
+                )} */}
+                {/* //todo: finish this refactor */}
                 <Text
                   pos="absolute"
                   left="50%"
