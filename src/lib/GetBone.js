@@ -1,6 +1,15 @@
 import { Image } from "@chakra-ui/react";
+import coinHeads from '../assets/bone_coin_heads.png';
+import coinTails from '../assets/bone_coin_tails.png';
+import d4 from '../assets/bone_d4.png';
+import d6 from '../assets/bone_d6.png';
+import d8 from '../assets/bone_d8.png';
+import d10 from '../assets/bone_d10.png';
+import d12 from '../assets/bone_d12.png';
+import d20 from '../assets/bone_d20.png';
+import dx from '../assets/bone_dx.png';
 
-export const HandleGetBone = (value) => {
+export const HandleGetBoneImage = (value) => {
   switch (value) {
     case 2:
       return GetCoinBoneImage();

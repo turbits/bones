@@ -17,19 +17,11 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 import { Fragment, useCallback, useState } from "react";
-import {
-  GetCoinBone,
-  GetD10Bone,
-  GetD12Bone,
-  GetD20Bone,
-  GetD4Bone,
-  GetD6Bone,
-  GetD8Bone,
-  GetDXBone,
-  HandleGetBone,
-} from "../lib/GetBone";
 
 import { CheckIcon } from "@chakra-ui/icons";
+import {
+  HandleGetBoneImage,
+} from "../lib/GetBone";
 import bone from "../assets/bone.png";
 import boneDi from "../assets/bonedi.png";
 import boneTri from "../assets/bonetri.png";
@@ -45,7 +37,7 @@ const Application = () => {
 
   const handleAddBone = useCallback(
     (value) => {
-      const boneGraphic = HandleGetBone(value);
+      const boneGraphic = HandleGetBoneImage(value);
       //todo: finish this refactor
 
       const min = 1;
