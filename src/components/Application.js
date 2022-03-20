@@ -19,21 +19,13 @@ import {
 import { Fragment, useCallback, useState } from "react";
 
 import { CheckIcon } from "@chakra-ui/icons";
-import {
-  HandleGetBoneImage,
-} from "../lib/GetBone";
-import bone from "../assets/bone.png";
-import boneDi from "../assets/bonedi.png";
-import boneTri from "../assets/bonetri.png";
+import { GetBoneElement } from "../lib/GetBone";
 
 const Application = () => {
   const [customBonesValue, setCustomBonesValue] = useState(null);
   const [totalBonesValue, setTotalBonesValue] = useState(null);
   const [bones, setBones] = useState([]);
   const { colorMode } = useColorMode();
-
-  // const format = (val) => `d` + val;
-  // const parse = (val) => val.replace(/^\d/, "");
 
   const handleAddBone = useCallback(
     (faceCount, isPercentile) => {
@@ -79,7 +71,9 @@ const Application = () => {
     <Fragment>
       {/* total */}
       <Box mb={5}>
-        <Heading>Total: {totalBonesValue}</Heading>
+        <Heading>
+          Total: {Number.isNaN(totalBonesValue) ? 0 : totalBonesValue}
+        </Heading>
       </Box>
       {/* outputs */}
       <Flex
@@ -93,6 +87,7 @@ const Application = () => {
         align="start"
         justify="start"
         padding={2}
+        overflow-y="scroll"
       >
         {bones.map((value, index) => {
           return (
@@ -108,25 +103,8 @@ const Application = () => {
               onClick={() => handleRemoveBone(index)}
               m="5px"
             >
-              <Flex w="100%" h="100%" align="center" justify="center">
-                {/* {value === 20 && <Image src={boneDi} w="100%" />}
-                {value % 3 === 0 && value !== 20 && (
-                  <Image src={boneTri} w="100%" />
-                )}
-                {value % 3 !== 0 && value !== 20 && (
-                  <Image src={bone} w="100%" />
-                )} */}
-                {/* //todo: finish this refactor */}
-                <Text
-                  pos="absolute"
-                  left="50%"
-                  top="50%"
-                  transform="translate(-50%, -50%)"
-                  color="gray.800"
-                >
-                  {value}
-                </Text>
-              </Flex>
+              {/* {console.log(bones[index])} */}
+              {bones[index][1]}
             </Button>
           );
         })}
@@ -138,7 +116,7 @@ const Application = () => {
         <Flex flexDir="column" alignItems="center" justify="center" mr={6}>
           <Heading mb={2}>What's this do</Heading>
           <Button mt="5px" onClick={() => handleClearBones()}>
-            Clear All Bones
+            Clear Bones
           </Button>
         </Flex>
 
