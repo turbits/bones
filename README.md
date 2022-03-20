@@ -1,4 +1,4 @@
-# ![bones logo](src/assets/logo.png) BONES
+# <img src="src/assets/logo.png" width="96" height="auto"> BONES
 
 Roll your bones...
 
