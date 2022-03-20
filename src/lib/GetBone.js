@@ -1,4 +1,4 @@
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
+import { Box, Image, Text } from "@chakra-ui/react";
 
 import coinHeads from "../assets/bone_coin_heads.png";
 import coinTails from "../assets/bone_coin_tails.png";
