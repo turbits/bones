@@ -143,14 +143,19 @@ const Application = () => {
             templateRows="1fr 1fr"
             gridGap="5px"
           >
-            <Button onClick={() => handleAddBone(100)}>d100</Button>
-            <Button onClick={() => handleAddBone(48)}>d48</Button>
-            <Button onClick={() => handleAddBone(20)}>d20</Button>
-            <Button onClick={() => handleAddBone(12)}>d12</Button>
-            <Button onClick={() => handleAddBone(10)}>d10</Button>
-            <Button onClick={() => handleAddBone(8)}>d8</Button>
-            <Button onClick={() => handleAddBone(4)}>d4</Button>
             <Button onClick={() => handleAddBone(2)}>coin</Button>
+            <Button onClick={() => handleAddBone(4)}>d4</Button>
+            <Button onClick={() => handleAddBone(6)}>d6</Button>
+            <Button onClick={() => handleAddBone(8)}>d8</Button>
+            <Button onClick={() => handleAddBone(10)}>d10</Button>
+            <Button onClick={() => handleAddBone(12)}>d12</Button>
+            <Button
+              bg={colorMode === "light" ? "gray.300" : "gray.600"}
+              onClick={() => handleAddBone(20)}
+            >
+              d20
+            </Button>
+            <Button onClick={() => handleAddBone(100)}>d100</Button>
           </Grid>
         </Flex>
 
