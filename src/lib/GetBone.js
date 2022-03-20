@@ -34,9 +34,9 @@ export const GetBoneElement = (faceCount, value) => {
 export const GetCoinBoneElement = (value) => {
   switch (value) {
     case 1:
-      return BoneElement(0, coinHeads);
-    case 2:
       return BoneElement(0, coinTails);
+    case 2:
+      return BoneElement(0, coinHeads);
     default:
       break;
   }
@@ -80,6 +80,8 @@ export const BoneElement = (value, graphic) => {
         top="50%"
         transform="translate(-50%, -50%)"
         color="gray.800"
+        fontSize="xl"
+        fontFamily="heading"
       >
         {value === 0 ? "" : value}
       </Text>
