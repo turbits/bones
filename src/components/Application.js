@@ -52,8 +52,9 @@ const Application = () => {
 
   const handleRemoveBone = useCallback(
     (index) => {
-      const _boneInArray = bones[index];
-      setTotalBonesValue(totalBonesValue - _boneInArray);
+      const _bone = bones[index];
+      const _boneValue = _bone[0];
+      setTotalBonesValue(totalBonesValue - _boneValue);
 
       const _bones = bones
         .slice(0, index)
