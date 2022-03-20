@@ -21,8 +21,8 @@ import { CheckIcon } from "@chakra-ui/icons";
 import { GetBoneElement } from "../lib/GetBone";
 
 const Application = () => {
-  const [customBonesValue, setCustomBonesValue] = useState(null);
-  const [totalBonesValue, setTotalBonesValue] = useState(null);
+  const [customBonesValue, setCustomBonesValue] = useState(100);
+  const [totalBonesValue, setTotalBonesValue] = useState(0);
   const [bones, setBones] = useState([]);
   const [shouldCoinAddToTotal, setShouldCoinAddToTotal] = useState(false);
   const { colorMode } = useColorMode();
@@ -166,6 +166,7 @@ const Application = () => {
               variant="filled"
               defaultValue={100}
               min={2}
+              max={1000}
               mr="5px"
               onChange={(val) => setCustomBonesValue(val)}
             >
