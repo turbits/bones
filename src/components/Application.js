@@ -3,6 +3,7 @@ import "../lib/GetBone";
 import {
   Box,
   Button,
+  Checkbox,
   Flex,
   Grid,
   Heading,
@@ -12,7 +13,6 @@ import {
   NumberInput,
   NumberInputField,
   NumberInputStepper,
-  Text,
   useColorMode,
 } from "@chakra-ui/react";
 import { Fragment, useCallback, useState } from "react";
@@ -24,10 +24,11 @@ const Application = () => {
   const [customBonesValue, setCustomBonesValue] = useState(null);
   const [totalBonesValue, setTotalBonesValue] = useState(null);
   const [bones, setBones] = useState([]);
+  const [shouldCoinAddToTotal, setShouldCoinAddToTotal] = useState(false);
   const { colorMode } = useColorMode();
 
   const handleAddBone = useCallback(
-    (faceCount, isPercentile) => {
+    (faceCount, isPercentile = false) => {
       const min = 1;
       const max = Math.ceil(faceCount);
       const boneValue = () => {
@@ -37,14 +38,17 @@ const Application = () => {
           return Math.round(Math.random() * (max - min) + min);
         }
       };
-      const _value = boneValue();
-
+      let _value = boneValue();
       const boneElement = GetBoneElement(faceCount, _value);
+
+      if (!shouldCoinAddToTotal) {
+        _value = faceCount === 2 ? 0 : _value;
+      }
 
       setTotalBonesValue(totalBonesValue + _value);
       setBones([...bones, [_value, boneElement]]);
     },
-    [bones, totalBonesValue]
+    [bones, totalBonesValue, shouldCoinAddToTotal]
   );
 
   const handleRemoveBone = useCallback(
@@ -113,14 +117,25 @@ const Application = () => {
       <Flex align="start" justify="center" mt={5}>
         {/* count */}
         <Flex flexDir="column" alignItems="center" justify="center" mr={6}>
-          <Heading mb={2}>What's this do</Heading>
-          <Button mt="5px" onClick={() => handleClearBones()}>
+          <Heading mb={2}>Curious</Heading>
+          <Button my={2} onClick={() => handleClearBones()}>
             Clear Bones
           </Button>
+
+          <Checkbox
+            my={2}
+            isChecked={shouldCoinAddToTotal}
+            onChange={() => setShouldCoinAddToTotal(!shouldCoinAddToTotal)}
+            fontFamily={"heading"}
+            fontWeight="bold"
+            colorScheme="gray"
+          >
+            Coin Adds Total
+          </Checkbox>
         </Flex>
 
         {/* common */}
-        <Flex flexDir="column" alignItems="center" justify="center" mr={6}>
+        <Flex flexDir="column" alignItems="center" justify="center" mx={6}>
           <Heading mb={2}>Common</Heading>
           <Grid
             templateColumns="1fr 1fr 1fr 1fr"
@@ -144,22 +159,12 @@ const Application = () => {
         </Flex>
 
         {/* custom inputs */}
-        <Flex
-          flexDir="column"
-          alignItems="center"
-          justifyContent="center"
-          ml={6}
-        >
+        <Flex flexDir="column" align="center" justify="center" ml={6}>
           <Heading mb={2}>Custom</Heading>
-          <Flex
-            flexWrap="nowrap"
-            justifyContent="flex-start"
-            alignItems="center"
-            mr={4}
-          >
+          <Flex flexWrap="nowrap" justify="flex-start" align="center">
             <NumberInput
               variant="filled"
-              defaultValue={2}
+              defaultValue={100}
               min={2}
               mr="5px"
               onChange={(val) => setCustomBonesValue(val)}
