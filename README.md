@@ -1,4 +1,4 @@
-# ![bones logo](src/assets/logo.png) BONES
+# <img src="src/assets/logo.png" width="96" height="auto"> BONES
 
 Roll your bones...
 
@@ -13,3 +13,9 @@ BONES is a simple dice/coin/???? rolling app
 ### What it made with
 
 Built with React & ChakraUI and hosted on Vercel
+
+
+## Releases
+
+- v1.1: graphical updates, refactorings, fixes
+- v1.0: initial release

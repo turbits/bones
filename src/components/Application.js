@@ -1,51 +1,72 @@
+import "../lib/GetBone";
+
 import {
   Box,
   Button,
+  Checkbox,
   Flex,
   Grid,
   Heading,
   IconButton,
-  Image,
   NumberDecrementStepper,
   NumberIncrementStepper,
   NumberInput,
   NumberInputField,
   NumberInputStepper,
-  Text,
   useColorMode,
 } from "@chakra-ui/react";
 import { Fragment, useCallback, useState } from "react";
 
 import { CheckIcon } from "@chakra-ui/icons";
-import bone from "../assets/bone.png";
-import boneDi from "../assets/bonedi.png";
-import boneTri from "../assets/bonetri.png";
+import { GetBoneElement } from "../lib/GetBone";
 
 const Application = () => {
-  const [customBonesValue, setCustomBonesValue] = useState(null);
-  const [totalBonesValue, setTotalBonesValue] = useState(null);
+  const [customBonesValue, setCustomBonesValue] = useState(100);
+  const [totalBonesValue, setTotalBonesValue] = useState(0);
   const [bones, setBones] = useState([]);
+  const [shouldCoinAddToTotal, setShouldCoinAddToTotal] = useState(false);
   const { colorMode } = useColorMode();
-
-  // const format = (val) => `d` + val;
-  // const parse = (val) => val.replace(/^\d/, "");
+  const outputView = document.querySelector("#outputView");
 
   const handleAddBone = useCallback(
-    (value) => {
+    (faceCount, isPercentile = false) => {
       const min = 1;
-      const max = Math.ceil(value);
-      const randomBoneValue = Math.round(Math.random() * (max - min) + min);
+      const max = Math.ceil(faceCount);
+      const boneValue = () => {
+        if (isPercentile) {
+          return Math.ceil((Math.random() * (max - min) + min) / 10) * 10;
+        } else {
+          return Math.round(Math.random() * (max - min) + min);
+        }
+      };
+      let _value = boneValue();
+      const boneElement = GetBoneElement(faceCount, _value);
 
-      setTotalBonesValue(totalBonesValue + randomBoneValue);
-      setBones([...bones, randomBoneValue]);
+      if (!shouldCoinAddToTotal) {
+        _value = faceCount === 2 ? 0 : _value;
+      }
+
+      setTotalBonesValue(totalBonesValue + _value);
+      setBones([...bones, [_value, boneElement]]);
+
+      // scroll
+      setTimeout(
+        outputView.scrollTo({
+          top: outputView.scrollHeight,
+          left: 0,
+          behavior: "smooth",
+        }),
+        200
+      );
     },
-    [bones, totalBonesValue]
+    [bones, totalBonesValue, shouldCoinAddToTotal, outputView]
   );
 
   const handleRemoveBone = useCallback(
     (index) => {
-      const _boneInArray = bones[index];
-      setTotalBonesValue(totalBonesValue - _boneInArray);
+      const _bone = bones[index];
+      const _boneValue = _bone[0];
+      setTotalBonesValue(totalBonesValue - _boneValue);
 
       const _bones = bones
         .slice(0, index)
@@ -64,10 +85,13 @@ const Application = () => {
     <Fragment>
       {/* total */}
       <Box mb={5}>
-        <Heading>Total: {totalBonesValue}</Heading>
+        <Heading>
+          Total: {Number.isNaN(totalBonesValue) ? 0 : totalBonesValue}
+        </Heading>
       </Box>
       {/* outputs */}
       <Flex
+        id="outputView"
         w="100%"
         h="100%"
         maxH="400px"
@@ -78,6 +102,7 @@ const Application = () => {
         align="start"
         justify="start"
         padding={2}
+        overflow-y="scroll"
       >
         {bones.map((value, index) => {
           return (
@@ -93,24 +118,8 @@ const Application = () => {
               onClick={() => handleRemoveBone(index)}
               m="5px"
             >
-              <Flex w="100%" h="100%" align="center" justify="center">
-                {value === 20 && <Image src={boneDi} w="100%" />}
-                {value % 3 === 0 && value !== 20 && (
-                  <Image src={boneTri} w="100%" />
-                )}
-                {value % 3 !== 0 && value !== 20 && (
-                  <Image src={bone} w="100%" />
-                )}
-                <Text
-                  pos="absolute"
-                  left="50%"
-                  top="50%"
-                  transform="translate(-50%, -50%)"
-                  color="gray.800"
-                >
-                  {value}
-                </Text>
-              </Flex>
+              {/* {console.log(bones[index])} */}
+              {bones[index][1]}
             </Button>
           );
         })}
@@ -120,49 +129,56 @@ const Application = () => {
       <Flex align="start" justify="center" mt={5}>
         {/* count */}
         <Flex flexDir="column" alignItems="center" justify="center" mr={6}>
-          <Heading mb={2}>What's this do</Heading>
-          <Button mt="5px" onClick={() => handleClearBones()}>
-            Clear All Bones
+          <Heading mb={2}>Curious</Heading>
+          <Button my={2} onClick={() => handleClearBones()}>
+            Clear Bones
           </Button>
+
+          <Checkbox
+            my={2}
+            isChecked={shouldCoinAddToTotal}
+            onChange={() => setShouldCoinAddToTotal(!shouldCoinAddToTotal)}
+            fontFamily={"heading"}
+            fontWeight="bold"
+            colorScheme="gray"
+          >
+            Coin Adds Total
+          </Checkbox>
         </Flex>
 
         {/* common */}
-        <Flex flexDir="column" alignItems="center" justify="center" mr={6}>
+        <Flex flexDir="column" alignItems="center" justify="center" mx={6}>
           <Heading mb={2}>Common</Heading>
           <Grid
             templateColumns="1fr 1fr 1fr 1fr"
             templateRows="1fr 1fr"
             gridGap="5px"
           >
-            <Button onClick={() => handleAddBone(100)}>d100</Button>
-            <Button onClick={() => handleAddBone(48)}>d48</Button>
-            <Button onClick={() => handleAddBone(20)}>d20</Button>
-            <Button onClick={() => handleAddBone(12)}>d12</Button>
-            <Button onClick={() => handleAddBone(10)}>d10</Button>
-            <Button onClick={() => handleAddBone(8)}>d8</Button>
-            <Button onClick={() => handleAddBone(4)}>d4</Button>
             <Button onClick={() => handleAddBone(2)}>coin</Button>
+            <Button onClick={() => handleAddBone(4)}>d4</Button>
+            <Button onClick={() => handleAddBone(6)}>d6</Button>
+            <Button onClick={() => handleAddBone(8)}>d8</Button>
+            <Button onClick={() => handleAddBone(10)}>d10</Button>
+            <Button onClick={() => handleAddBone(12)}>d12</Button>
+            <Button
+              bg={colorMode === "light" ? "gray.300" : "gray.600"}
+              onClick={() => handleAddBone(20)}
+            >
+              d20
+            </Button>
+            <Button onClick={() => handleAddBone(100, true)}>d%</Button>
           </Grid>
         </Flex>
 
         {/* custom inputs */}
-        <Flex
-          flexDir="column"
-          alignItems="center"
-          justifyContent="center"
-          ml={6}
-        >
+        <Flex flexDir="column" align="center" justify="center" ml={6}>
           <Heading mb={2}>Custom</Heading>
-          <Flex
-            flexWrap="nowrap"
-            justifyContent="flex-start"
-            alignItems="center"
-            mr={4}
-          >
+          <Flex flexWrap="nowrap" justify="flex-start" align="center">
             <NumberInput
               variant="filled"
-              defaultValue={2}
+              defaultValue={100}
               min={2}
+              max={1000}
               mr="5px"
               onChange={(val) => setCustomBonesValue(val)}
             >
