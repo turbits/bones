@@ -36,16 +36,22 @@ const Application = () => {
   // const parse = (val) => val.replace(/^\d/, "");
 
   const handleAddBone = useCallback(
-    (value) => {
-      const boneGraphic = HandleGetBoneImage(value);
-      //todo: finish this refactor
-
+    (faceCount, isPercentile) => {
       const min = 1;
-      const max = Math.ceil(value);
-      const boneValue = Math.round(Math.random() * (max - min) + min);
+      const max = Math.ceil(faceCount);
+      const boneValue = () => {
+        if (isPercentile) {
+          return Math.ceil((Math.random() * (max - min) + min) / 10) * 10;
+        } else {
+          return Math.round(Math.random() * (max - min) + min);
+        }
+      };
+      const _value = boneValue();
 
-      setTotalBonesValue(totalBonesValue + boneValue);
-      setBones([...bones, [boneValue, boneGraphic]]);
+      const boneElement = GetBoneElement(faceCount, _value);
+
+      setTotalBonesValue(totalBonesValue + _value);
+      setBones([...bones, [_value, boneElement]]);
     },
     [bones, totalBonesValue]
   );
@@ -156,7 +162,7 @@ const Application = () => {
             >
               d20
             </Button>
-            <Button onClick={() => handleAddBone(100)}>d100</Button>
+            <Button onClick={() => handleAddBone(100, true)}>d%</Button>
           </Grid>
         </Flex>
 
