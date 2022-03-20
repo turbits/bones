@@ -7,7 +7,6 @@ import {
   Grid,
   Heading,
   IconButton,
-  Image,
   NumberDecrementStepper,
   NumberIncrementStepper,
   NumberInput,
