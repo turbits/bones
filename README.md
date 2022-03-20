@@ -16,6 +16,7 @@ Built with React & ChakraUI and hosted on Vercel
 
 ---
 
-v1.0: initial release
+## Releases
 
-v1.1: graphical updates, refactorings, fixes
+- v1.1: graphical updates, refactorings, fixes
+- v1.0: initial release
