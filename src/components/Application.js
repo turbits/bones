@@ -26,6 +26,7 @@ const Application = () => {
   const [bones, setBones] = useState([]);
   const [shouldCoinAddToTotal, setShouldCoinAddToTotal] = useState(false);
   const { colorMode } = useColorMode();
+  const outputView = document.querySelector("#outputView");
 
   const handleAddBone = useCallback(
     (faceCount, isPercentile = false) => {
@@ -47,8 +48,18 @@ const Application = () => {
 
       setTotalBonesValue(totalBonesValue + _value);
       setBones([...bones, [_value, boneElement]]);
+
+      // scroll
+      setTimeout(
+        outputView.scrollTo({
+          top: outputView.scrollHeight,
+          left: 0,
+          behavior: "smooth",
+        }),
+        200
+      );
     },
-    [bones, totalBonesValue, shouldCoinAddToTotal]
+    [bones, totalBonesValue, shouldCoinAddToTotal, outputView]
   );
 
   const handleRemoveBone = useCallback(
@@ -80,6 +91,7 @@ const Application = () => {
       </Box>
       {/* outputs */}
       <Flex
+        id="outputView"
         w="100%"
         h="100%"
         maxH="400px"
