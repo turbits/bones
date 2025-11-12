@@ -1,6 +1,6 @@
 # <img src="src/assets/logo.png" width="96" height="auto"> BONES
 
-Roll your bones...[open Bones app](https://bones.turbits.dev)
+Roll your bones...[open Bones app](https://bones.turbits.sh/)
 
 ### Why bones..?
 
