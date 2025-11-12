@@ -12,7 +12,7 @@ Bones is a simple but polished dice rolling/coin tossing app.
 
 ### What it made with
 
-I built Bones with React and ChakraUI, and it's hosted on Vercel.
+I built Bones with some custom pixel art, React, and ChakraUI. It's hosted on Vercel.
 
 ## Releases
 
